@@ -1,5 +1,6 @@
 const express = require("express");
-const cors = require("cors"); // npm install cors
+const cors = require("cors");
+const path = require("path");
 const connectDB = require("./config/db");
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/authRoutes");
@@ -19,6 +20,9 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+// ✅ IMPORTANT: Serve static files from uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
 app.use("/api/auth", authRoutes);
